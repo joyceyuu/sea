@@ -1,0 +1,32 @@
+language: python
+
+python:
+  - "3.4"
+  - "2.7"
+  - "pypy"
+
+addons:
+  apt:
+    packages:
+    - libblas-dev
+    - liblapack-dev
+    - libatlas-base-dev
+    - gfortran
+    - libeigen3-dev
+
+# command to install dependencies
+install:
+  - pip install .[dev]
+
+# command to run tests, e.g. python setup.py test
+script:
+  - py.test --cov=./
+
+cache:
+  - apt
+  - pip
+  - directories:
+    - $HOME/.cache/pip
+
+after_success:
+  - codecov
