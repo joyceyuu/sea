@@ -1,25 +1,25 @@
 #!/usr/bin/env python
-"""Setup environment for Sea."""
+"""Setup environment for sea."""
 
 from setuptools import setup, find_packages
 
-exec(open('Sea/__version__.py').read())
+exec(open('sea/__version__.py').read())
 readme = open('README.md').read()
 
 setup(
-    name='Sea',
+    name='sea',
     version='0.1.0',
     description='A Python Package',
     long_description=readme,
-    author='Sea',
+    author='sea',
     author_email='joyce.xinyue.wang@gmail.com',
-    url='https://github.com/JoyceXinyueWang/Sea',
+    url='https://github.com/JoyceXinyueWang/sea',
     packages=find_packages(),
-    package_dir={'Sea': 'Sea'},
+    package_dir={'sea': 'sea'},
     include_package_data=True,
     entry_points={
         'console_scripts': [
-            'Sea = Sea.scripts.cli:cli',
+            'sea = sea.scripts.cli:cli',
         ]
     },
     install_requires=[
@@ -51,7 +51,7 @@ setup(
     },
     license="All Rights Reserved",
     zip_safe=False,
-    keywords='Sea',
+    keywords='sea',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         "Operating System :: POSIX",

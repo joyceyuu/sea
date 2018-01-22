@@ -1,25 +1,28 @@
 """Pipeline for cleaning raw dataset."""
 import pandas as pd
 import numpy as np
+from typing import Any
 
-from dretch import io
+from dretch import io, config
+
+RAW_DATA = 'data/seafloor_lith_data_all_features.csv'
 
 
-def main():
+def main() -> Any:
     # load raw data
-    raw_data = pd.read_csv("seafloor_lith_data_all_features.csv")
+    raw_data = pd.read_csv(RAW_DATA)
 
     # convert special missing notation to nan
-    data = raw_data.replace(to_replace='nan', value=np.nan) 
+    data = raw_data.replace(to_replace='nan', value=np.nan)
     training_bool = pd.notnull(data['lithology'])
     query_bool = ~training_bool
 
     data_train = data[training_bool].copy()
     data_train['lithology'] = data_train['lithology'].astype(int).astype(str)
-    data_query = data[query_bool].copy()    
+    data_query = data[query_bool].copy()
 
-    io.save_csv(data_train, 'train_clean.csv', index=False)
-    io.save_csv(data_query, 'test_clean.csv', index=False)
+    io.save_csv(data_train, config.train_data, index=False)
+    io.save_csv(data_query, config.query_data, index=False)
 
     return data
 
