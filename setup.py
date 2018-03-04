@@ -26,8 +26,8 @@ setup(
         'numpy==1.13.1',
         'scipy==0.19.1',
         'click==6.7',
-        # 'mypy==0.521',
-        # 'mypy_extensions==0.3.0'
+        'mypy==0.521',
+        'mypy_extensions==0.3.0',
         'modron==0.1.0',
         'dretch==0.1.0',
         'glabrezu==0.3.0',

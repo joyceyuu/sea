@@ -6,18 +6,19 @@ import glabrezu as gl
 from dretch import io, config
 
 
-def main() -> Any:
+def classify() -> Any:
     """Apply different classifiers to sea data."""
     value = io.load_modron(config.output_file)
-    train_value, query_value = value['train'], value['query']
+    train_value, query_value = value['train'].values(), value['query'].values()
 
     # define transformers and model
-    transformer = [gl.transforms.ScaleFloats()]
+    transformer = [gl.transforms.FillOrdinals(),
+                   gl.transforms.ScaleFloats()]
     models = {
         'Logistic': gl.Pipeline(transformer,
-                                gl.classifiers.LogisticRegression())
+                                gl.classifiers.Logistic())
     }
-
+    import IPython; IPython.embed()
     # validation
     scores = gl.validation.ScoreAggregator()
     for name in models:

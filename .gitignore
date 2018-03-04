@@ -56,3 +56,6 @@ docs/_build
 
 # Cookiecutter
 output/
+
+# mypy cache
+.mypy_cache/
