@@ -9,8 +9,8 @@ from dretch.spec import(
     Ranked)
 
 X = Spec(
-    "longitude", Ordinal(),
-    "latitude", Ordinal(),
+    # "longitude", Ordinal(),
+    # "latitude", Ordinal(),
     "bathymetry", Ordinal(),
     "nitrate", Ordinal(),
     "oxygen", Ordinal(),
