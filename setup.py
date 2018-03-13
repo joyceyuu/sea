@@ -30,6 +30,7 @@ setup(
         "aboleth==0.7.0",
         "sklearn==0.0",
         "jupyter==1.0.0",
+        "matplotlib==2.2.0",
         # "mypy==0.521",
         # "mypy_extensions==0.3.0",
         # "modron==0.1.0",
