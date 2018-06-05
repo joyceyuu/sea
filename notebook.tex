@@ -1,0 +1,1465 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Keras Lithology}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Lithology Prediction}\label{lithology-prediction}
+
+\subsubsection{Raw Data Exploration}\label{raw-data-exploration}
+
+\begin{itemize}
+\tightlist
+\item
+  Show head (6 rows) of raw data
+\item
+  Color map of lithology over longitude and latitude
+\item
+  Histogram of lithology
+\item
+  Missing part visualization
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{o}{\PYZpc{}} \PY{n}{matplotlib} \PY{n}{inline}
+        
+        \PY{n}{dfdata} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/train\PYZus{}clean.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{dfdata}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:}    longitude  latitude  lithology  bathymetry   nitrate    oxygen  phosphate  \textbackslash{}
+        0       -180        75          4      -231.0       NaN  8.552258        NaN   
+        1       -179        75          4      -203.0  1.702168  9.494461   0.754516   
+        2       -178        75          4      -304.0  1.850258  9.578869   0.735949   
+        3       -177        75          4      -278.0  1.960688  9.668440   0.720070   
+        4       -176        75          4      -247.0  2.056301  9.763065   0.706926   
+        
+           productivity   salinity   silicate  temperature  
+        0    310.199677  31.165499        NaN    -0.878415  
+        1    312.468658  29.931450  12.485500    -1.785413  
+        2    291.436279  30.048571  12.902109    -1.904204  
+        3    277.305817  30.211161  13.251008    -1.869162  
+        4    262.947571  30.398439  13.591722    -1.688048  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{lon} \PY{o}{=} \PY{n}{dfdata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        \PY{n}{lat} \PY{o}{=} \PY{n}{dfdata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        \PY{n}{y} \PY{o}{=} \PY{n}{dfdata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lithology}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        
+        \PY{c+c1}{\PYZsh{} plot lithology vesus longitude and latitude}
+        \PY{k}{def} \PY{n+nf}{draw\PYZus{}global}\PY{p}{(}\PY{n}{lon}\PY{p}{,} \PY{n}{lat}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{title}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tab20}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{)}\PY{p}{:}
+            \PY{n}{sc} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{lon}\PY{p}{,} \PY{n}{lat}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{y}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cmap}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{n}{vmin}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{n}{vmax}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{180}\PY{p}{,} \PY{l+m+mi}{180}\PY{p}{]}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{70}\PY{p}{,} \PY{l+m+mi}{78}\PY{p}{]}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{n}{sc}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n}{draw\PYZus{}global}\PY{p}{(}\PY{n}{lon}\PY{p}{,} \PY{n}{lat}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lithology along longitude and latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_2_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Imbalanced Multiclass
+Classification}\label{imbalanced-multiclass-classification}
+
+As we can see from the histogram of target lithology, the class
+distribution is not uniform. Some classes have large amount of samples
+whereas some classes have less samples. This enables model to cost less
+to predict those rare classes wrong. To fix this problem, we need to
+re-weight classes to obtain balanced classes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{k}{def} \PY{n+nf}{draw\PYZus{}hist}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{title}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} plot the histogram of lithology}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{draw\PYZus{}hist}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Histogram of Lithology}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{training\PYZus{}data} \PY{o}{=} \PY{n}{dfdata}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} obtain list of feature names}
+         \PY{n}{target} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lithology}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{features} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{training\PYZus{}data}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         \PY{n}{features}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+         \PY{n}{features}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{features}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} impute missing with mean}
+         \PY{n}{fill\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{training\PYZus{}data}\PY{p}{:}
+             \PY{n}{fill\PYZus{}dict}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{training\PYZus{}data}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{)}
+         \PY{n}{training\PYZus{}data} \PY{o}{=} \PY{n}{training\PYZus{}data}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{value}\PY{o}{=}\PY{n}{fill\PYZus{}dict}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Keras - Neural Network
+Classification}\label{keras---neural-network-classification}
+
+We will deploy keras - a neural network library which is capable for
+running on top of Tensorflow. The neural network has the following
+structure:
+
+\begin{itemize}
+\tightlist
+\item
+  Input layer
+\item
+  Hidden layer 1: consists of 64 nerons
+\item
+  Dropout layer : drop out 20\% nerons to avoid overfitting
+\item
+  Hidden layer 2: consists of 64 nerons
+\item
+  Dropout layer : drop out 20\% nerons to avoid overfitting
+\item
+  Hidden layer 3: consists of 32 nerons
+\item
+  Dropout layer : drop out 20\% nerons to avoid overfitting
+\item
+  Output layer
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}\PY{p}{,} \PY{n}{Dropout}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Sequential}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{callbacks} \PY{k}{import} \PY{n}{History}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{wrappers}\PY{n+nn}{.}\PY{n+nn}{scikit\PYZus{}learn} \PY{k}{import} \PY{n}{KerasClassifier}
+         \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{regularizers}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{np\PYZus{}utils}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{StandardScaler}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}predict}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{KFold}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{LabelEncoder}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{pipeline} \PY{k}{import} \PY{n}{Pipeline}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{class\PYZus{}weight}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{c+c1}{\PYZsh{} fix random seed for reproducibility}
+         \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{training\PYZus{}data}\PY{p}{[}\PY{n}{features}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+         \PY{n}{Y} \PY{o}{=} \PY{n}{training\PYZus{}data}\PY{p}{[}\PY{n}{target}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} standardize X}
+         \PY{n}{scaler} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} onehot target Y \PYZhy{}\PYZgt{} convert integers to dummy variables}
+         \PY{n}{encoder} \PY{o}{=} \PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+         \PY{n}{Y} \PY{o}{=} \PY{n}{encoder}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{Y}\PY{p}{)}
+         \PY{n}{dummy\PYZus{}Y} \PY{o}{=} \PY{n}{np\PYZus{}utils}\PY{o}{.}\PY{n}{to\PYZus{}categorical}\PY{p}{(}\PY{n}{Y}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} define baseline model}
+         \PY{k}{def} \PY{n+nf}{baseline\PYZus{}model}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{activation} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{relu}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n}{dropout\PYZus{}ratio} \PY{o}{=} \PY{l+m+mf}{0.1}
+             \PY{n}{initializer} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{random\PYZus{}uniform}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n}{numclass} \PY{o}{=} \PY{n}{dummy\PYZus{}Y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{model} \PY{o}{=} \PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{n}{input\PYZus{}dim}\PY{o}{=}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{n}{activation}\PY{p}{,} \PY{n}{kernel\PYZus{}initializer}\PY{o}{=}\PY{n}{initializer}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dropout}\PY{p}{(}\PY{n}{rate}\PY{o}{=}\PY{n}{dropout\PYZus{}ratio}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{n}{activation}\PY{p}{,} \PY{n}{kernel\PYZus{}initializer}\PY{o}{=}\PY{n}{initializer}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dropout}\PY{p}{(}\PY{n}{rate}\PY{o}{=}\PY{n}{dropout\PYZus{}ratio}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{32}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{n}{activation}\PY{p}{,} \PY{n}{kernel\PYZus{}initializer}\PY{o}{=}\PY{n}{initializer}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dropout}\PY{p}{(}\PY{n}{rate}\PY{o}{=}\PY{n}{dropout\PYZus{}ratio}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{numclass}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{softmax}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{kernel\PYZus{}initializer}\PY{o}{=}\PY{n}{initializer}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} compile}
+             \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{categorical\PYZus{}crossentropy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{adam}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return} \PY{n}{model}
+         
+         \PY{c+c1}{\PYZsh{} class reweighting for imbalanced class}
+         \PY{n}{weight} \PY{o}{=} \PY{n}{class\PYZus{}weight}\PY{o}{.}\PY{n}{compute\PYZus{}class\PYZus{}weight}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{balanced}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{Y}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} training \PYZhy{}\PYZgt{} cross validation}
+         \PY{n}{estimator} \PY{o}{=} \PY{n}{KerasClassifier}\PY{p}{(}\PY{n}{build\PYZus{}fn}\PY{o}{=}\PY{n}{baseline\PYZus{}model}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                                    \PY{n}{class\PYZus{}weight}\PY{o}{=}\PY{n}{weight}\PY{p}{)}
+         \PY{n}{kfold} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{seed}\PY{p}{)}
+         \PY{n}{results} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}predict}\PY{p}{(}\PY{n}{estimator}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{dummy\PYZus{}Y}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{kfold}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+d:\textbackslash{}software\textbackslash{}anaconda\textbackslash{}envs\textbackslash{}tensorflow\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}base.py:115: DeprecationWarning: Estimator KerasClassifier modifies parameters in \_\_init\_\_. This behavior is deprecated as of 0.18 and support for this behavior will be removed in 0.20.
+  \% type(estimator).\_\_name\_\_, DeprecationWarning)
+INFO (theano.gof.compilelock): Refreshing lock C:\textbackslash{}Users\textbackslash{}joyce\textbackslash{}AppData\textbackslash{}Local\textbackslash{}Theano\textbackslash{}compiledir\_Windows-10-10.0.17134-SP0-Intel64\_Family\_6\_Model\_158\_Stepping\_10\_GenuineIntel-3.5.5-64\textbackslash{}lock\_dir\textbackslash{}lock
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/150
+25366/25366 [==============================] - 2s 98us/step - loss: 1.5236 - acc: 0.4770
+Epoch 2/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.4168 - acc: 0.5156
+Epoch 3/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.3881 - acc: 0.5235
+Epoch 4/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.3723 - acc: 0.5276
+Epoch 5/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.3594 - acc: 0.5336
+Epoch 6/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.3502 - acc: 0.5355
+Epoch 7/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.3401 - acc: 0.5376
+Epoch 8/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.3333 - acc: 0.5405
+Epoch 9/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.3239 - acc: 0.5416
+Epoch 10/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.3125 - acc: 0.5442
+Epoch 11/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.3078 - acc: 0.5442
+Epoch 12/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.3034 - acc: 0.5479
+Epoch 13/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.2957 - acc: 0.5477
+Epoch 14/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.2900 - acc: 0.5495
+Epoch 15/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.2831 - acc: 0.5505
+Epoch 16/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.2804 - acc: 0.5527
+Epoch 17/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2746 - acc: 0.5524
+Epoch 18/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.2700 - acc: 0.5531
+Epoch 19/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2645 - acc: 0.5562
+Epoch 20/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.2580 - acc: 0.5564
+Epoch 21/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.2529 - acc: 0.5567
+Epoch 22/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.2510 - acc: 0.5572 0s - loss: 1.2519 - acc:
+Epoch 23/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.2473 - acc: 0.5567
+Epoch 24/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.2438 - acc: 0.5598
+Epoch 25/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.2405 - acc: 0.5574
+Epoch 26/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.2389 - acc: 0.5576
+Epoch 27/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.2364 - acc: 0.5620
+Epoch 28/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.2342 - acc: 0.5599
+Epoch 29/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.2273 - acc: 0.5638
+Epoch 30/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.2284 - acc: 0.5620
+Epoch 31/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.2232 - acc: 0.5634
+Epoch 32/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.2224 - acc: 0.5644
+Epoch 33/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.2220 - acc: 0.5653
+Epoch 34/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.2190 - acc: 0.5664
+Epoch 35/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.2179 - acc: 0.5632
+Epoch 36/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.2190 - acc: 0.5628
+Epoch 37/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.2124 - acc: 0.5668
+Epoch 38/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.2114 - acc: 0.5641
+Epoch 39/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.2103 - acc: 0.5622
+Epoch 40/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.2082 - acc: 0.5673
+Epoch 41/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.2061 - acc: 0.5680
+Epoch 42/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.2018 - acc: 0.5659
+Epoch 43/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.2068 - acc: 0.5672
+Epoch 44/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1974 - acc: 0.5688
+Epoch 45/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1992 - acc: 0.5666
+Epoch 46/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1981 - acc: 0.5657
+Epoch 47/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1996 - acc: 0.5662
+Epoch 48/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1994 - acc: 0.5667
+Epoch 49/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1962 - acc: 0.5679
+Epoch 50/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1922 - acc: 0.5710
+Epoch 51/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1953 - acc: 0.5680
+Epoch 52/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1892 - acc: 0.5716
+Epoch 53/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1881 - acc: 0.5703
+Epoch 54/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1884 - acc: 0.5710
+Epoch 55/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1852 - acc: 0.5716
+Epoch 56/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1865 - acc: 0.5709
+Epoch 57/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1848 - acc: 0.5719
+Epoch 58/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1837 - acc: 0.5725
+Epoch 59/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1810 - acc: 0.5692
+Epoch 60/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1830 - acc: 0.5711
+Epoch 61/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1837 - acc: 0.5735
+Epoch 62/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1821 - acc: 0.5757
+Epoch 63/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1782 - acc: 0.5739
+Epoch 64/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1764 - acc: 0.5740
+Epoch 65/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1715 - acc: 0.5783
+Epoch 66/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1757 - acc: 0.5762
+Epoch 67/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1761 - acc: 0.5760
+Epoch 68/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1763 - acc: 0.5778
+Epoch 69/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1715 - acc: 0.5781
+Epoch 70/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1726 - acc: 0.5740
+Epoch 71/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1730 - acc: 0.5764
+Epoch 72/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1684 - acc: 0.5756
+Epoch 73/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1747 - acc: 0.5748
+Epoch 74/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1708 - acc: 0.5782
+Epoch 75/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1703 - acc: 0.5783
+Epoch 76/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1678 - acc: 0.5784
+Epoch 77/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1709 - acc: 0.5769
+Epoch 78/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1674 - acc: 0.5764
+Epoch 79/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1642 - acc: 0.5769
+Epoch 80/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1673 - acc: 0.5772
+Epoch 81/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1659 - acc: 0.5754
+Epoch 82/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1642 - acc: 0.5781
+Epoch 83/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1654 - acc: 0.5760
+Epoch 84/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1658 - acc: 0.5789
+Epoch 85/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1676 - acc: 0.5776
+Epoch 86/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1656 - acc: 0.5767
+Epoch 87/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1625 - acc: 0.5777
+Epoch 88/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1641 - acc: 0.5779
+Epoch 89/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1607 - acc: 0.5803
+Epoch 90/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1602 - acc: 0.5788
+Epoch 91/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1606 - acc: 0.5792
+Epoch 92/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1562 - acc: 0.5787
+Epoch 93/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1595 - acc: 0.5815
+Epoch 94/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1582 - acc: 0.5807
+Epoch 95/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1565 - acc: 0.5821
+Epoch 96/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1569 - acc: 0.5790
+Epoch 97/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1590 - acc: 0.5827
+Epoch 98/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1557 - acc: 0.5802
+Epoch 99/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1493 - acc: 0.5820
+Epoch 100/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1498 - acc: 0.5818
+Epoch 101/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1498 - acc: 0.5842
+Epoch 102/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1565 - acc: 0.5799
+Epoch 103/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1566 - acc: 0.5817
+Epoch 104/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1504 - acc: 0.5816
+Epoch 105/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1561 - acc: 0.5849
+Epoch 106/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1538 - acc: 0.5809
+Epoch 107/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1541 - acc: 0.5797
+Epoch 108/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1526 - acc: 0.5847
+Epoch 109/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1472 - acc: 0.5837
+Epoch 110/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1402 - acc: 0.5833
+Epoch 111/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1518 - acc: 0.5826
+Epoch 112/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1494 - acc: 0.5857
+Epoch 113/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1493 - acc: 0.5826
+Epoch 114/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1480 - acc: 0.5846
+Epoch 115/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1434 - acc: 0.5878
+Epoch 116/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1425 - acc: 0.5867
+Epoch 117/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1511 - acc: 0.5835
+Epoch 118/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1473 - acc: 0.5836
+Epoch 119/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1471 - acc: 0.5837
+Epoch 120/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1473 - acc: 0.5842
+Epoch 121/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1418 - acc: 0.5868
+Epoch 122/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1476 - acc: 0.5858
+Epoch 123/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1440 - acc: 0.5875
+Epoch 124/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1449 - acc: 0.5843
+Epoch 125/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1453 - acc: 0.5844
+Epoch 126/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1409 - acc: 0.5876
+Epoch 127/150
+25366/25366 [==============================] - 2s 97us/step - loss: 1.1419 - acc: 0.5874
+Epoch 128/150
+25366/25366 [==============================] - 2s 98us/step - loss: 1.1396 - acc: 0.5867
+Epoch 129/150
+25366/25366 [==============================] - 2s 98us/step - loss: 1.1383 - acc: 0.5875
+Epoch 130/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1395 - acc: 0.5874
+Epoch 131/150
+25366/25366 [==============================] - 2s 98us/step - loss: 1.1418 - acc: 0.5886
+Epoch 132/150
+25366/25366 [==============================] - 2s 98us/step - loss: 1.1457 - acc: 0.5865
+Epoch 133/150
+25366/25366 [==============================] - 2s 98us/step - loss: 1.1437 - acc: 0.5874
+Epoch 134/150
+25366/25366 [==============================] - 2s 98us/step - loss: 1.1385 - acc: 0.5884
+Epoch 135/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1386 - acc: 0.5848
+Epoch 136/150
+25366/25366 [==============================] - 2s 98us/step - loss: 1.1411 - acc: 0.5891
+Epoch 137/150
+25366/25366 [==============================] - 2s 98us/step - loss: 1.1421 - acc: 0.5850
+Epoch 138/150
+25366/25366 [==============================] - 2s 98us/step - loss: 1.1306 - acc: 0.5903
+Epoch 139/150
+25366/25366 [==============================] - 2s 98us/step - loss: 1.1366 - acc: 0.5911
+Epoch 140/150
+25366/25366 [==============================] - 2s 98us/step - loss: 1.1413 - acc: 0.5835
+Epoch 141/150
+25366/25366 [==============================] - 2s 97us/step - loss: 1.1447 - acc: 0.5883
+Epoch 142/150
+25366/25366 [==============================] - 2s 96us/step - loss: 1.1356 - acc: 0.5890
+Epoch 143/150
+25366/25366 [==============================] - 2s 96us/step - loss: 1.1415 - acc: 0.5863
+Epoch 144/150
+25366/25366 [==============================] - 2s 96us/step - loss: 1.1323 - acc: 0.5889
+Epoch 145/150
+25366/25366 [==============================] - 2s 97us/step - loss: 1.1368 - acc: 0.5863
+Epoch 146/150
+25366/25366 [==============================] - 2s 96us/step - loss: 1.1379 - acc: 0.5901
+Epoch 147/150
+25366/25366 [==============================] - 2s 96us/step - loss: 1.1332 - acc: 0.5863
+Epoch 148/150
+25366/25366 [==============================] - 2s 95us/step - loss: 1.1434 - acc: 0.5892
+Epoch 149/150
+25366/25366 [==============================] - 2s 96us/step - loss: 1.1323 - acc: 0.5915
+Epoch 150/150
+25366/25366 [==============================] - 2s 96us/step - loss: 1.1344 - acc: 0.5904
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO (theano.gof.compilelock): Refreshing lock C:\textbackslash{}Users\textbackslash{}joyce\textbackslash{}AppData\textbackslash{}Local\textbackslash{}Theano\textbackslash{}compiledir\_Windows-10-10.0.17134-SP0-Intel64\_Family\_6\_Model\_158\_Stepping\_10\_GenuineIntel-3.5.5-64\textbackslash{}lock\_dir\textbackslash{}lock
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+12683/12683 [==============================] - 0s 21us/step
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+d:\textbackslash{}software\textbackslash{}anaconda\textbackslash{}envs\textbackslash{}tensorflow\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}base.py:115: DeprecationWarning: Estimator KerasClassifier modifies parameters in \_\_init\_\_. This behavior is deprecated as of 0.18 and support for this behavior will be removed in 0.20.
+  \% type(estimator).\_\_name\_\_, DeprecationWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.5188 - acc: 0.4745
+Epoch 2/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.4098 - acc: 0.5190
+Epoch 3/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.3819 - acc: 0.5253
+Epoch 4/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.3641 - acc: 0.5317
+Epoch 5/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.3541 - acc: 0.5332
+Epoch 6/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.3428 - acc: 0.5360
+Epoch 7/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.3366 - acc: 0.5376
+Epoch 8/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.3254 - acc: 0.5435
+Epoch 9/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.3199 - acc: 0.5464
+Epoch 10/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.3104 - acc: 0.5461
+Epoch 11/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.3042 - acc: 0.5474
+Epoch 12/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2997 - acc: 0.5481
+Epoch 13/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.2962 - acc: 0.5481
+Epoch 14/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.2876 - acc: 0.5503
+Epoch 15/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.2836 - acc: 0.5541
+Epoch 16/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2822 - acc: 0.5497
+Epoch 17/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.2759 - acc: 0.5515
+Epoch 18/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2713 - acc: 0.5553
+Epoch 19/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2665 - acc: 0.5571
+Epoch 20/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.2627 - acc: 0.5572
+Epoch 21/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.2599 - acc: 0.5568
+Epoch 22/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2577 - acc: 0.5585
+Epoch 23/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2520 - acc: 0.5579
+Epoch 24/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2515 - acc: 0.5584
+Epoch 25/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2465 - acc: 0.5637
+Epoch 26/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2436 - acc: 0.5635
+Epoch 27/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2391 - acc: 0.5622
+Epoch 28/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2380 - acc: 0.5650
+Epoch 29/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.2402 - acc: 0.5609
+Epoch 30/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.2339 - acc: 0.5624
+Epoch 31/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2291 - acc: 0.5661 1s 
+Epoch 32/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.2309 - acc: 0.5664
+Epoch 33/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.2281 - acc: 0.5682
+Epoch 34/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2213 - acc: 0.5699
+Epoch 35/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.2208 - acc: 0.5690
+Epoch 36/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2230 - acc: 0.5651
+Epoch 37/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2213 - acc: 0.5684
+Epoch 38/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2176 - acc: 0.5678
+Epoch 39/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2205 - acc: 0.5663
+Epoch 40/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2143 - acc: 0.5672
+Epoch 41/150
+25366/25366 [==============================] - 3s 106us/step - loss: 1.2120 - acc: 0.5725
+Epoch 42/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.2075 - acc: 0.5734
+Epoch 43/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.2107 - acc: 0.5704
+Epoch 44/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.2069 - acc: 0.5723
+Epoch 45/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.2116 - acc: 0.5703
+Epoch 46/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.2074 - acc: 0.5709
+Epoch 47/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2035 - acc: 0.5745
+Epoch 48/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.2077 - acc: 0.5726
+Epoch 49/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.2019 - acc: 0.5748
+Epoch 50/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1969 - acc: 0.5755
+Epoch 51/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1982 - acc: 0.5733
+Epoch 52/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1988 - acc: 0.5755
+Epoch 53/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.2002 - acc: 0.5743
+Epoch 54/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1957 - acc: 0.5737
+Epoch 55/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1947 - acc: 0.5752
+Epoch 56/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1933 - acc: 0.5779
+Epoch 57/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1949 - acc: 0.5774
+Epoch 58/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1884 - acc: 0.5780
+Epoch 59/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1926 - acc: 0.5770
+Epoch 60/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1889 - acc: 0.5787
+Epoch 61/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1808 - acc: 0.5794
+Epoch 62/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1834 - acc: 0.5787
+Epoch 63/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1832 - acc: 0.5792
+Epoch 64/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1791 - acc: 0.5810
+Epoch 65/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.1811 - acc: 0.5806
+Epoch 66/150
+25366/25366 [==============================] - 3s 108us/step - loss: 1.1764 - acc: 0.5803
+Epoch 67/150
+25366/25366 [==============================] - 3s 109us/step - loss: 1.1763 - acc: 0.5818
+Epoch 68/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.1742 - acc: 0.5826
+Epoch 69/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1771 - acc: 0.5825
+Epoch 70/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1778 - acc: 0.5814
+Epoch 71/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1764 - acc: 0.5795
+Epoch 72/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1806 - acc: 0.5803
+Epoch 73/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1723 - acc: 0.5846
+Epoch 74/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1712 - acc: 0.5846
+Epoch 75/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1723 - acc: 0.5821
+Epoch 76/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1748 - acc: 0.5824
+Epoch 77/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1700 - acc: 0.5842
+Epoch 78/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1689 - acc: 0.5850
+Epoch 79/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1644 - acc: 0.5836
+Epoch 80/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1694 - acc: 0.5857
+Epoch 81/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1716 - acc: 0.5830
+Epoch 82/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1707 - acc: 0.5827
+Epoch 83/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1680 - acc: 0.5845
+Epoch 84/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1708 - acc: 0.5831
+Epoch 85/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1648 - acc: 0.5858
+Epoch 86/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1649 - acc: 0.5866
+Epoch 87/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1663 - acc: 0.5832
+Epoch 88/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1677 - acc: 0.5864
+Epoch 89/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1647 - acc: 0.5862
+Epoch 90/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1657 - acc: 0.5842
+Epoch 91/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1624 - acc: 0.5885
+Epoch 92/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1593 - acc: 0.5885
+Epoch 93/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1618 - acc: 0.5873
+Epoch 94/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1657 - acc: 0.5893
+Epoch 95/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1596 - acc: 0.5867
+Epoch 96/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1612 - acc: 0.5882
+Epoch 97/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1586 - acc: 0.5894
+Epoch 98/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1531 - acc: 0.5896
+Epoch 99/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1613 - acc: 0.5865
+Epoch 100/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1568 - acc: 0.5919
+Epoch 101/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1588 - acc: 0.5880
+Epoch 102/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1567 - acc: 0.5855
+Epoch 103/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1652 - acc: 0.5867
+Epoch 104/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1550 - acc: 0.5908
+Epoch 105/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1592 - acc: 0.5884
+Epoch 106/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1540 - acc: 0.5917
+Epoch 107/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1566 - acc: 0.5884
+Epoch 108/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1555 - acc: 0.5894
+Epoch 109/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1572 - acc: 0.5919
+Epoch 110/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1531 - acc: 0.5893
+Epoch 111/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1585 - acc: 0.5874
+Epoch 112/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1485 - acc: 0.5889
+Epoch 113/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1538 - acc: 0.5880
+Epoch 114/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1523 - acc: 0.5922
+Epoch 115/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1475 - acc: 0.5912
+Epoch 116/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1509 - acc: 0.5889
+Epoch 117/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1479 - acc: 0.5916
+Epoch 118/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1481 - acc: 0.5931
+Epoch 119/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1460 - acc: 0.5940
+Epoch 120/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1491 - acc: 0.5914
+Epoch 121/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1461 - acc: 0.5921
+Epoch 122/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1502 - acc: 0.5916
+Epoch 123/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1484 - acc: 0.5943
+Epoch 124/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1534 - acc: 0.5907
+Epoch 125/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1540 - acc: 0.5878
+Epoch 126/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1481 - acc: 0.5895
+Epoch 127/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1440 - acc: 0.5915
+Epoch 128/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1498 - acc: 0.5920
+Epoch 129/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1444 - acc: 0.5934
+Epoch 130/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1433 - acc: 0.5922
+Epoch 131/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1415 - acc: 0.5934
+Epoch 132/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1487 - acc: 0.5908
+Epoch 133/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1465 - acc: 0.5906
+Epoch 134/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1459 - acc: 0.5924
+Epoch 135/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1400 - acc: 0.5962
+Epoch 136/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1456 - acc: 0.5904
+Epoch 137/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1409 - acc: 0.5940
+Epoch 138/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1403 - acc: 0.5954
+Epoch 139/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1424 - acc: 0.5943
+Epoch 140/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1507 - acc: 0.5901
+Epoch 141/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1455 - acc: 0.5942
+Epoch 142/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1387 - acc: 0.5942
+Epoch 143/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1377 - acc: 0.5928
+Epoch 144/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1387 - acc: 0.5925
+Epoch 145/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1407 - acc: 0.5951
+Epoch 146/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1357 - acc: 0.5941
+Epoch 147/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1453 - acc: 0.5957
+Epoch 148/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1421 - acc: 0.5916
+Epoch 149/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1413 - acc: 0.5944
+Epoch 150/150
+25366/25366 [==============================] - 3s 99us/step - loss: 1.1404 - acc: 0.5941
+12683/12683 [==============================] - 0s 21us/step
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+d:\textbackslash{}software\textbackslash{}anaconda\textbackslash{}envs\textbackslash{}tensorflow\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}base.py:115: DeprecationWarning: Estimator KerasClassifier modifies parameters in \_\_init\_\_. This behavior is deprecated as of 0.18 and support for this behavior will be removed in 0.20.
+  \% type(estimator).\_\_name\_\_, DeprecationWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.5366 - acc: 0.4682
+Epoch 2/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.4208 - acc: 0.5095
+Epoch 3/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.3875 - acc: 0.5228
+Epoch 4/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.3761 - acc: 0.5269
+Epoch 5/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.3620 - acc: 0.5315
+Epoch 6/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.3555 - acc: 0.5358
+Epoch 7/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.3447 - acc: 0.5364
+Epoch 8/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.3359 - acc: 0.5378
+Epoch 9/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.3271 - acc: 0.5433
+Epoch 10/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.3176 - acc: 0.5451
+Epoch 11/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.3153 - acc: 0.5462
+Epoch 12/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.3087 - acc: 0.5465
+Epoch 13/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.3072 - acc: 0.5476 0s - loss: 1.3
+Epoch 14/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.2967 - acc: 0.5509
+Epoch 15/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.2944 - acc: 0.5512
+Epoch 16/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.2875 - acc: 0.5526
+Epoch 17/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.2857 - acc: 0.5556
+Epoch 18/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.2749 - acc: 0.5561
+Epoch 19/150
+25366/25366 [==============================] - 3s 108us/step - loss: 1.2725 - acc: 0.5540
+Epoch 20/150
+25366/25366 [==============================] - 3s 107us/step - loss: 1.2699 - acc: 0.5595
+Epoch 21/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.2640 - acc: 0.5596
+Epoch 22/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2592 - acc: 0.5579
+Epoch 23/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2558 - acc: 0.5606
+Epoch 24/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2576 - acc: 0.5617
+Epoch 25/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2470 - acc: 0.5616
+Epoch 26/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.2469 - acc: 0.5645
+Epoch 27/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2425 - acc: 0.5638
+Epoch 28/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2347 - acc: 0.5659
+Epoch 29/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.2364 - acc: 0.5654
+Epoch 30/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.2353 - acc: 0.5631
+Epoch 31/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2306 - acc: 0.5673
+Epoch 32/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2254 - acc: 0.5684
+Epoch 33/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2253 - acc: 0.5683
+Epoch 34/150
+25366/25366 [==============================] - 3s 105us/step - loss: 1.2240 - acc: 0.5662
+Epoch 35/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2199 - acc: 0.5700
+Epoch 36/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2172 - acc: 0.5702
+Epoch 37/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2169 - acc: 0.5710
+Epoch 38/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2136 - acc: 0.5700
+Epoch 39/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2110 - acc: 0.5696
+Epoch 40/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.2116 - acc: 0.5711
+Epoch 41/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2102 - acc: 0.5705
+Epoch 42/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.2119 - acc: 0.5697 0s - loss: 1.2
+Epoch 43/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.2046 - acc: 0.5749
+Epoch 44/150
+25366/25366 [==============================] - 3s 104us/step - loss: 1.1977 - acc: 0.5743
+Epoch 45/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1991 - acc: 0.5708
+Epoch 46/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1940 - acc: 0.5752
+Epoch 47/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1993 - acc: 0.5752
+Epoch 48/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1931 - acc: 0.5772
+Epoch 49/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1976 - acc: 0.5737
+Epoch 50/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1950 - acc: 0.5747
+Epoch 51/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1884 - acc: 0.5753
+Epoch 52/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1924 - acc: 0.5731
+Epoch 53/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1889 - acc: 0.5753
+Epoch 54/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1930 - acc: 0.5774
+Epoch 55/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1890 - acc: 0.5759
+Epoch 56/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1829 - acc: 0.5781
+Epoch 57/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1842 - acc: 0.5744
+Epoch 58/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1898 - acc: 0.5736
+Epoch 59/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1809 - acc: 0.5807
+Epoch 60/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1820 - acc: 0.5803
+Epoch 61/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1801 - acc: 0.5811
+Epoch 62/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1803 - acc: 0.5774
+Epoch 63/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1783 - acc: 0.5789
+Epoch 64/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1807 - acc: 0.5830
+Epoch 65/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1746 - acc: 0.5761
+Epoch 66/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1771 - acc: 0.5761
+Epoch 67/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1803 - acc: 0.5765
+Epoch 68/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1791 - acc: 0.5783
+Epoch 69/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1754 - acc: 0.5798
+Epoch 70/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1811 - acc: 0.5788
+Epoch 71/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1720 - acc: 0.5807
+Epoch 72/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1733 - acc: 0.5821
+Epoch 73/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1737 - acc: 0.5813
+Epoch 74/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1688 - acc: 0.5796
+Epoch 75/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1678 - acc: 0.5818
+Epoch 76/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1752 - acc: 0.5786
+Epoch 77/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1684 - acc: 0.5814
+Epoch 78/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1664 - acc: 0.5842
+Epoch 79/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1682 - acc: 0.5840
+Epoch 80/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1697 - acc: 0.5793
+Epoch 81/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1676 - acc: 0.5814
+Epoch 82/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1642 - acc: 0.5839
+Epoch 83/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1676 - acc: 0.5810
+Epoch 84/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1682 - acc: 0.5817
+Epoch 85/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1602 - acc: 0.5854
+Epoch 86/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1701 - acc: 0.5823
+Epoch 87/150
+25366/25366 [==============================] - 3s 103us/step - loss: 1.1662 - acc: 0.5809
+Epoch 88/150
+25366/25366 [==============================] - 3s 102us/step - loss: 1.1649 - acc: 0.5827
+Epoch 89/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1630 - acc: 0.5813
+Epoch 90/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1664 - acc: 0.5818
+Epoch 91/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1588 - acc: 0.5852
+Epoch 92/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1630 - acc: 0.5846
+Epoch 93/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1632 - acc: 0.5805
+Epoch 94/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1610 - acc: 0.5847
+Epoch 95/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1612 - acc: 0.5839
+Epoch 96/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1590 - acc: 0.5850
+Epoch 97/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1587 - acc: 0.5851
+Epoch 98/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1589 - acc: 0.5852
+Epoch 99/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1597 - acc: 0.5845
+Epoch 100/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1567 - acc: 0.5837
+Epoch 101/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1604 - acc: 0.5856
+Epoch 102/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1538 - acc: 0.5852
+Epoch 103/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1581 - acc: 0.5850
+Epoch 104/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1532 - acc: 0.5859
+Epoch 105/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1562 - acc: 0.5840
+Epoch 106/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1571 - acc: 0.5870
+Epoch 107/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1589 - acc: 0.5818
+Epoch 108/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1494 - acc: 0.5885
+Epoch 109/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1494 - acc: 0.5850
+Epoch 110/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1525 - acc: 0.5860
+Epoch 111/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1582 - acc: 0.5839
+Epoch 112/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1494 - acc: 0.5857
+Epoch 113/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1543 - acc: 0.5852
+Epoch 114/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1520 - acc: 0.5860
+Epoch 115/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1513 - acc: 0.5847
+Epoch 116/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1556 - acc: 0.5857
+Epoch 117/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1522 - acc: 0.5872
+Epoch 118/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1543 - acc: 0.5877
+Epoch 119/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1496 - acc: 0.5858
+Epoch 120/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1512 - acc: 0.5885
+Epoch 121/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1537 - acc: 0.5852
+Epoch 122/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1548 - acc: 0.5867
+Epoch 123/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1479 - acc: 0.5856
+Epoch 124/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1548 - acc: 0.5857
+Epoch 125/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1551 - acc: 0.5855
+Epoch 126/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1525 - acc: 0.5846
+Epoch 127/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1477 - acc: 0.5879
+Epoch 128/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1532 - acc: 0.5852
+Epoch 129/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1501 - acc: 0.5845
+Epoch 130/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1406 - acc: 0.5865
+Epoch 131/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1475 - acc: 0.5897
+Epoch 132/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1522 - acc: 0.5878
+Epoch 133/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1414 - acc: 0.5880
+Epoch 134/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1517 - acc: 0.5882
+Epoch 135/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1408 - acc: 0.5860
+Epoch 136/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1475 - acc: 0.5878
+Epoch 137/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1449 - acc: 0.5888
+Epoch 138/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1487 - acc: 0.5902
+Epoch 139/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1489 - acc: 0.5863
+Epoch 140/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1438 - acc: 0.5905
+Epoch 141/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1480 - acc: 0.5877
+Epoch 142/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1410 - acc: 0.5887
+Epoch 143/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1486 - acc: 0.5898
+Epoch 144/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1405 - acc: 0.5911
+Epoch 145/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1481 - acc: 0.5905
+Epoch 146/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1427 - acc: 0.5894
+Epoch 147/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1512 - acc: 0.5870
+Epoch 148/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1388 - acc: 0.5924
+Epoch 149/150
+25366/25366 [==============================] - 3s 100us/step - loss: 1.1412 - acc: 0.5926
+Epoch 150/150
+25366/25366 [==============================] - 3s 101us/step - loss: 1.1519 - acc: 0.5883
+12683/12683 [==============================] - 0s 21us/step
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{Y}\PY{p}{,} \PY{n}{results}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{draw\PYZus{}hist}\PY{p}{(}\PY{n}{Y}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Histogram of Actual lithology}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{draw\PYZus{}hist}\PY{p}{(}\PY{n}{results}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Histogram of Predicted lithology}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{draw\PYZus{}global}\PY{p}{(}\PY{n}{lon}\PY{p}{,} \PY{n}{lat}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Actual lithology}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{draw\PYZus{}global}\PY{p}{(}\PY{n}{lon}\PY{p}{,} \PY{n}{lat}\PY{p}{,} \PY{n}{results} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted lithology}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy = 0.603826644589871
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
