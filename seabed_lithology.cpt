@@ -1,0 +1,19 @@
+# cpt file for ocean sediment classification
+# COLOR_MODEL = RGB
+#
+1	128/130/132		;Gravel and coarser
+2	255/241/0		;Sand
+3	250/169/25 		;Silt
+4	112/75/42		;Clay
+5	14/145/207		;Calcareous ooze
+6	13/150/71 		;Radiolarian ooze
+7	190/215/83		;Diatom ooze
+8	85/147/141 		;Sponge spicules
+9	131/112/178		;Mixed calcareous/siliceous ooze
+10	247/187/213		;Shells and coral fragments
+11	234/27/27  		;Ash and volcanic sand/gravel
+12	195/154/107		;Siliceous mud
+13	0/46/167 		;Fine-grained calcareous sediment
+B	0	0	0
+F	255	255	255
+N	180 180 180
