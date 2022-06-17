@@ -23,7 +23,7 @@ setup(
             ]
         },
     install_requires=[
-        "numpy==1.13.1",
+        "numpy==1.21.0",
         "scipy==0.19.1",
         "click==6.7",
         "pandas==0.22.0",
