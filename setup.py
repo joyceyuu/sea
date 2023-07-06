@@ -24,7 +24,7 @@ setup(
         },
     install_requires=[
         "numpy==1.13.1",
-        "scipy==0.19.1",
+        "scipy==1.10.0",
         "click==6.7",
         "pandas==0.22.0",
         "aboleth==0.7.0",
